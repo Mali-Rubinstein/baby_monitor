@@ -1,0 +1,913 @@
+/* src/App.css */
+
+/* --- כללים גלובליים ועיצוב בסיסי לכל האפליקציה --- */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff; /* רקע בהיר לכלל האפליקציה */
+  margin: 0;
+  padding: 0;
+  direction: rtl; /* כיווניות מימין לשמאל כברירת מחדל לכל האפליקציה */
+}
+
+/* הגדרות עבור אלמנט ה-root של React */
+/* נשתמש ב- #root כדי לאפס סגנונות עבור תצוגות שונות */
+#root {
+  min-height: 100vh; /* גובה מלא של המסך */
+  width: 100%;
+  /* הסרתי מכאן את ה-flexbox הגלובלי, כיוון שכל קומפוננטה תטפל במיקום שלה */
+}
+
+/* --- עיצוב מסך הכניסה (LoginScreen) --- */
+/* (הקומפוננטה LoginScreen צריכה להיות מוקפת ב- <div className="login-screen-container">) */
+.login-screen-container {
+  display: flex; /* כדי למרכז את התוכן של מסך הכניסה בתוכו */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* מרכוז אנכי ואופקי בתוך ה-login-screen-container */
+  min-height: 100vh; /* שתתפרש על גובה מלא כדי למרכז את התוכן */
+  background-color: #f0f8ff; /* רקע למסך הכניסה - יכול להיות שונה מה-body */
+  padding: 20px; /* ריווח כללי */
+  box-sizing: border-box; /* כדי שהריווח לא ירחיב את האלמנט */
+
+  /* מאפייני המרכז כמו שרצית */
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto; /* מרכוז הקונטיינר עצמו */
+  gap: 25px;
+}
+
+.main-title {
+  font-family: 'Amatic SC', cursive; /* או פונט אחר שאת אוהבת */
+  font-size: 3.5em;
+  color: #4CAF50;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid #8BC34A;
+  padding-bottom: 10px;
+}
+
+.login-options-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.role-button {
+  background-color: #8BC34A;
+  color: white;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  flex: 1;
+  max-width: 220px;
+}
+
+.role-button:hover {
+  background-color: #689F38;
+  transform: translateY(-2px);
+}
+
+.login-form-mother,
+.login-form-nurse {
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.login-form-mother h2,
+.login-form-nurse h2 {
+    color: #4CAF50;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80%;
+  max-width: 300px;
+}
+
+.input-group label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+  font-size: 1.1em;
+}
+
+.login-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1.1em;
+  text-align: right;
+  direction: rtl;
+  box-sizing: border-box;
+}
+
+.login-input:focus {
+  border-color: #4CAF50;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+}
+
+.login-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 80%;
+  max-width: 300px;
+  margin-top: 10px;
+}
+
+.login-button:hover {
+  background-color: #45a049;
+  transform: translateY(-1px);
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 1.1em;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+/* --- עיצוב מסך התינוקייה (NurseryScreen) --- */
+/* (הקומפוננטה NurseryScreen צריכה להיות מוקפת ב- <div className="container">) */
+
+.container {
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh; /* שמירה על גובה מינימלי */
+    /* אין צורך ב-display: flex כאן, כי ה-baby-board הוא grid */
+}
+
+/* כותרת מותאמת אישית לתינוקיה */
+.nursery-title { /* שם קלאס חדש עבור ה-h1 בתינוקיה */
+    font-family: 'Dancing Script', cursive; /* וודאי שהפונט זמין */
+    font-size: 3rem;
+    color: #4b6f44;
+    margin-bottom: 30px;
+    text-decoration: underline; /* קו תחתון מודגש */
+}
+
+.reset-btn {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.reset-btn:hover {
+    background-color: #e55347;
+}
+
+.baby-board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px; /* הגדלתי מ-10px ל-30px */
+    justify-items: center;
+    margin-top: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    /* max-width: 1300px; */ /* אולי תרצי להפעיל את זה שוב */
+    /* margin: 20px auto; */ /* אם את רוצה למרכז את הלוח כולו */
+}
+
+.baby-card {
+    width: 90%; /* הכרטיס תופס 90% מהתא */
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    height: 100%; /* כדי שכל הכרטיסים יהיו באותו גובה */
+}
+
+.baby-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.camera-container {
+    margin-bottom: 15px;
+    border: 1px solid #a0e0ff;
+    border-radius: 8px;
+    padding: 5px;
+    background-color: #f5fafd;
+    /* pointer-events: none; */ /* הסרתי כדי לא לחסום אינטראקציות */
+}
+
+.camera-feed-mini h2 {
+    font-size: 1em;
+    color: #4682b4;
+    margin-bottom: 5px;
+    text-align: center;
+    /* pointer-events: none; */
+}
+
+.baby-camera-stream-mini {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    display: block;
+    background-color: #e0e0e0;
+    /* pointer-events: none; */
+}
+
+.no-camera-msg {
+    color: #999;
+    font-style: italic;
+    font-size: 0.8em;
+    padding: 10px 0;
+    text-align: center;
+    /* pointer-events: none; */
+}
+
+.baby-info {
+    margin-bottom: 15px;
+    /* pointer-events: none; */
+}
+.baby-info h2 {
+    font-size: 1.5rem;
+    color: #4b6f44;
+    margin: 10px 0;
+    /* pointer-events: none; */
+}
+.baby-info p {
+    font-size: 1rem;
+    color: #555;
+    /* pointer-events: none; */
+}
+
+.baby-actions {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: auto; /* קריטי: מאפשר לחיצות על הכפתורים עצמם */
+    z-index: 10;
+}
+
+.baby-actions button {
+    background-color: #4b6f44;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 100%;
+}
+
+.baby-actions button:hover {
+    background-color: #3a5c35;
+    transform: scale(1.05);
+}
+
+.baby-card.crying {
+    background-color: #ffcccb;
+    animation: glowing 1s ease-in-out infinite, blink 1s infinite;
+}
+
+@keyframes glowing {
+    0% {
+        box-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347;
+    }
+    50% {
+        box-shadow: 0 0 20px #ff6347, 0 0 40px #ff6347, 0 0 60px #ff6347;
+    }
+    100% {
+        box-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347;
+    }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+button:focus {
+    outline: none;
+}
+
+/* --- רספונסיביות עבור מסך התינוקייה --- */
+@media (max-width: 1400px) {
+    .baby-board {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .baby-board {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    .nursery-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 850px) {
+    .baby-board {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    .nursery-title {
+        font-size: 2rem;
+    }
+    .baby-card {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 550px) {
+    .baby-board {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .nursery-title {
+        font-size: 1.8rem;
+    }
+    .baby-card {
+        width: 90%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+}
+
+/* --- כללי כפתורי חזרה כלליים - יכולים לשמש גם ב-MotherDashboard אם יש --- */
+.back-button {
+    background-color: #9E9E9E; /* Grey */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.back-button:hover {
+    background-color: #757575;
+}
+
+/* קלאס ייעודי לכפתור "חזרה למסך כניסה" במסך האמא (MotherDashboard) */
+.back-to-login-button {
+    background-color: #9E9E9E; /* Grey */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.back-to-login-button:hover {
+    background-color: #757575;
+}
+/* src/App.css */
+
+/* --- כללים גלובליים ועיצוב בסיסי לכל האפליקציה --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* ודא ש-padding ו-border כלולים ברוחב ובגובה */
+}
+
+/* כללי ה-body הועברו ל-index.css */
+
+
+/* הגדרות עבור אלמנט ה-root של React */
+#root {
+  display: flex; /* הפוך את ה-root ל-flex container */
+  flex-direction: column; /* סדר את התוכן בעמודה */
+  align-items: center; /* מרכז אופקית (אם יש רוחב מוגבל) */
+  justify-content: center; /* מרכז אנכית */
+  min-height: 100%; /* תופס לפחות 100% מהגובה של ה-body */
+  /* הסרנו 100vh מכאן כי ה-body כבר נותן את הגובה */
+}
+
+/* --- עיצוב מסך הכניסה (LoginScreen) --- */
+.login-screen-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 0; /* לא יתפשט על כל השטח אם יש עוד תוכן ב-root */
+  flex-shrink: 0; /* לא יתכווץ */
+  padding: 20px;
+  box-sizing: border-box;
+
+  /* מאפייני המרכז */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+  margin: auto; /* מרכז את הקונטיינר עצמו אנכית ואופקית בתוך ה-flex container */
+  gap: 25px; /* רווח בין אלמנטים פנימיים */
+  min-height: 300px; /* גובה מינימלי למניעת קריסה */
+}
+
+.main-title {
+  font-family: 'Amatic SC', cursive; /* וודא שהפונט הזה או דומה לו זמין בפרויקט */
+  font-size: 3.5em;
+  color: #4CAF50;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid #8BC34A;
+  padding-bottom: 10px;
+  text-align: center; /* וודא מרכוז */
+}
+
+.login-options-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  width: 100%;
+  flex-wrap: wrap; /* כדי שהכפתורים יעברו שורה במסכים קטנים */
+}
+
+.role-button {
+  background-color: #8BC34A;
+  color: white;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  flex: 1;
+  max-width: 220px;
+  min-width: 150px; /* כדי שלא יתכווצו יותר מדי */
+}
+
+.role-button:hover {
+  background-color: #689F38;
+  transform: translateY(-2px);
+}
+
+.login-form-mother,
+.login-form-nurse {
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.login-form-mother h2,
+.login-form-nurse h2 {
+    color: #4CAF50;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80%;
+  max-width: 300px;
+}
+
+.input-group label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+  font-size: 1.1em;
+}
+
+.login-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1.1em;
+  text-align: right;
+  direction: rtl;
+  box-sizing: border-box;
+}
+
+.login-input:focus {
+  border-color: #4CAF50;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+}
+
+.login-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 80%;
+  max-width: 300px;
+  margin-top: 10px;
+}
+
+.login-button:hover {
+  background-color: #45a049;
+  transform: translateY(-1px);
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 1.1em;
+  margin-top: 15px;
+  margin-bottom: 0;
+  text-align: center;
+  width: 100%; /* וודא שתופס רוחב מלא כדי למרכז */
+}
+
+/* --- עיצוב מסך התינוקייה (NurseryScreen) --- */
+.container {
+    text-align: center;
+    padding: 20px;
+    flex-grow: 1; /* תופס את השטח הפנוי בתוך ה-root */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* להתחיל מלמעלה */
+    width: 100%; /* וודא תופס את כל הרוחב */
+}
+
+/* כותרת מותאמת אישית לתינוקיה */
+.nursery-title {
+    font-family: 'Dancing Script', cursive; /* וודא שהפונט זמין */
+    font-size: 3rem;
+    color: #4b6f44;
+    margin-bottom: 30px;
+    text-decoration: underline;
+}
+
+.reset-btn {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.reset-btn:hover {
+    background-color: #e55347;
+}
+
+.baby-board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+    justify-items: center;
+    margin-top: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    width: 100%; /* ודא שיתפשט לכל הרוחב הזמין */
+    max-width: 1300px; /* מגביל את הרוחב המקסימלי לוח */
+    margin: 20px auto; /* מרכז את הלוח כולו */
+    flex-shrink: 0; /* כדי שלא יתכווץ בגלל flex-grow ב-container */
+}
+
+.baby-card {
+    width: 90%;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    height: auto; /* שינוי: לתת לתוכן לקבוע את הגובה, אבל עדיין לשמור על מראה אחיד */
+    min-height: 250px; /* גובה מינימלי לכרטיס כדי לשמור על יציבות */
+}
+
+.baby-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.camera-container {
+    margin-bottom: 15px;
+    border: 1px solid #a0e0ff;
+    border-radius: 8px;
+    padding: 5px;
+    background-color: #f5fafd;
+}
+
+.camera-feed-mini h2 {
+    font-size: 1em;
+    color: #4682b4;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.baby-camera-stream-mini {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    display: block;
+    background-color: #e0e0e0;
+}
+
+.no-camera-msg {
+    color: #999;
+    font-style: italic;
+    font-size: 0.8em;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.baby-info {
+    margin-bottom: 15px;
+}
+.baby-info h2 {
+    font-size: 1.5rem;
+    color: #4b6f44;
+    margin: 10px 0;
+}
+.baby-info p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.4; /* לשפר קריאות של טקסט */
+}
+
+.baby-actions {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 10;
+}
+
+.baby-actions button {
+    background-color: #4b6f44;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 100%;
+}
+
+.baby-actions button:hover {
+    background-color: #3a5c35;
+    transform: scale(1.05);
+}
+
+.baby-card.crying {
+    background-color: #ffcccb;
+    animation: glowing 1s ease-in-out infinite, blink 1s infinite;
+}
+
+@keyframes glowing {
+    0% {
+        box-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347;
+    }
+    50% {
+        box-shadow: 0 0 20px #ff6347, 0 0 40px #ff6347, 0 0 60px #ff6347;
+    }
+    100% {
+        box-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347;
+    }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+button:focus {
+    outline: none;
+}
+
+/* --- רספונסיביות עבור מסך התינוקייה --- */
+@media (max-width: 1400px) {
+    .baby-board {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .baby-board {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    .nursery-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 850px) {
+    .baby-board {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    .nursery-title {
+        font-size: 2rem;
+    }
+    .baby-card {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 550px) {
+    .baby-board {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .nursery-title {
+        font-size: 1.8rem;
+    }
+    .baby-card {
+        width: 90%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+}
+
+/* --- כללי כפתורי חזרה כלליים - יכולים לשמש גם ב-MotherDashboard אם יש --- */
+.back-button {
+    background-color: #9E9E9E; /* Grey */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.back-button:hover {
+    background-color: #757575;
+}
+
+/* קלאס ייעודי לכפתור "חזרה למסך כניסה" במסך האחיות והאמא */
+.back-to-login-button {
+    background-color: #9E9E9E; /* Grey */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    margin-bottom: 20px; /* הוספתי מרווח תחתון לכפתור */
+    align-self: flex-start; /* כדי שיתיישר לשמאל בתוך ה-container החדש */
+}
+
+.back-to-login-button:hover {
+    background-color: #757575;
+}
+/* בתוך App.css */
+
+.nurse-calls-section {
+  background-color: #ffe0b2; /* צבע כתום בהיר */
+  border: 2px solid #ff9800; /* מסגרת כתומה */
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nurse-calls-section h2 {
+  color: #d32f2f; /* אדום כהה לכותרת */
+  margin-bottom: 15px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.nurse-call-item {
+  background-color: #fff3e0; /* צהוב בהיר */
+  border: 1px solid #ffcc80; /* מסגרת צהובה */
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.nurse-call-item p {
+  margin: 2px 0;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.nurse-call-item strong {
+  color: #e65100; /* כתום עמוק לטקסט מודגש */
+}
+.urgent-calls-banner {
+    background-color: #fff3cd;
+    border: 2px solid #ffeeba;
+    padding: 16px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    color: #856404;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.call-alert {
+    margin-top: 8px;
+    padding: 8px;
+    background: #fff8e1;
+    border-left: 5px solid #ffc107;
+}
+
+.timestamp {
+    font-size: 0.9em;
+    margin-right: 10px;
+    color: #6c757d;
+}
+.alert-message {
+    background-color: #ffe5e5; /* אדום בהיר */
+    color: #b30000;
+    font-weight: bold;
+    padding: 10px;
+    border: 2px solid #ff4d4d;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    animation: flashAlert 1s ease-in-out infinite alternate;
+}
+
+@keyframes flashAlert {
+    from { background-color: #ffe5e5; }
+    to { background-color: #ffc0c0; }
+}
+
